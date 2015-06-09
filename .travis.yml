@@ -12,9 +12,9 @@ branches:
     only:
         - feature_TravisCI
 
-#before_install:
-#    - sudo apt-get update
-#    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
+before_install:
+    - sudo apt-get update
+    - sudo apt-get install python-numpy
   
 install:
     - ./configure --prefix=/usr/local # This is the default prefix anyways
