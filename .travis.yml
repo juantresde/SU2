@@ -19,14 +19,14 @@ branches:
 install:
     - ./configure --prefix=/usr/local # This is the default prefix anyways
     # Add environmental variables according to the configure step
-    - sudo mkdir /usr/local/SU2
+    #- sudo mkdir /usr/local/SU2
     - export SU2_RUN="/usr/local/bin"
     # Find out what SU2_HOME is used for.
     - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
-    #- make -j 8
-    - make install
+    - make -j 8
+    - sudo make install
     - cd QuickStart/
   
 # run test
