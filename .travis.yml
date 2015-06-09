@@ -28,8 +28,8 @@ install:
     - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
-    - make -j 8
-    - sudo make install
+    #- make -j 8
+    #- sudo make install
     - cd QuickStart/
   
 # run test
