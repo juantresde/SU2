@@ -17,15 +17,15 @@ branches:
 #    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
   
 install:
-    - ./configure
+    - ./configure --prefix=/usr/local/SU2
     # Add environmental variables according to the configure step
-    - export SU2_RUN="/usr/local/bin"
+    - export SU2_RUN="/usr/local/SU2/bin"
+    # Find out what SU2_HOME is used for.
     - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
-    #- make -j 4
-    - echo $PATH
-    - which gcc
+    - make -j 4
+    - make install
     - cd QuickStart/
   
 # run test
