@@ -20,7 +20,7 @@ before_install:
     - sudo apt-get install -qq python-numpy
     #- sudo apt-cache search mpi
     #- sudo apt-cache search .
-    - sudo apt-get install libcr-dev mpich2 mpich2-doc
+    #- sudo apt-get install libcr-dev mpich2 mpich2-doc
     - which mpicxx
     - which mpirun
     - which mpiexec
