@@ -32,5 +32,6 @@ install:
 # run test
 script:  
     #- python automatic_regression.py
-    - SU2_CFD inv_NACA0012.cfg
+    #- SU2_CFD inv_NACA0012.cfg
+    - parallel_computation.py -f inv_NACA0012.cfg -n 1
 
