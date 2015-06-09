@@ -17,10 +17,9 @@ branches:
 #    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
   
 install:
-    - ./configure --prefix=/usr/local/SU2
-    - mkdir /usr/local/SU2
+    - ./configure --prefix=/usr/local # This is the default prefix anyways
     # Add environmental variables according to the configure step
-    - export SU2_RUN="/usr/local/SU2/bin"
+    - export SU2_RUN="/usr/local/bin"
     # Find out what SU2_HOME is used for.
     - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
