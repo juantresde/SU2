@@ -18,13 +18,14 @@ branches:
   
 install:
     - ./configure --prefix=/usr/local/SU2
+    - mkdir /usr/local/SU2
     # Add environmental variables according to the configure step
     - export SU2_RUN="/usr/local/SU2/bin"
     # Find out what SU2_HOME is used for.
     - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
-    - make -j 4
+    - make -j 8
     - make install
     - cd QuickStart/
   
