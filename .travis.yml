@@ -4,9 +4,6 @@ language: cpp
 compiler:
     - gcc
 
-env:
-    - MPI=mpich2
-
 notifications:
     email:
         - padronas@stanford.edu
@@ -20,13 +17,14 @@ before_install:
     - sudo apt-get install -qq python-numpy
     #- sudo apt-cache search mpi
     #- sudo apt-cache search .
-    #- sudo apt-get install libcr-dev mpich2 mpich2-doc
+    - sudo apt-get install libcr-dev mpich2 mpich2-doc
+    - which mpicc
     - which mpicxx
     - which mpirun
     - which mpiexec
 
 install:
-    - ./configure --enable-mpi --prefix=/usr/local # This is the default prefix anyways
+    - ./configure --enable-mpi --with-cc=/usr/bin/mpicc --with-cxx=/usr/bin/mpicxx --prefix=/usr/local # This is the default prefix anyways
     # Add environmental variables according to the configure step
     #- sudo mkdir /usr/local/SU2
     - export SU2_RUN="/usr/local/bin"
@@ -34,8 +32,8 @@ install:
     - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
-    #- make -j 8
-    #- sudo make install
+    - make -j 8
+    - sudo make install
     - cd QuickStart/
   
 # run test
