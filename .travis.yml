@@ -4,6 +4,9 @@ language: cpp
 compiler:
     - gcc
 
+env:
+    - MPI=mpich2
+
 notifications:
     email:
         - padronas@stanford.edu
@@ -17,7 +20,7 @@ before_install:
     - sudo apt-get install python-numpy
   
 install:
-    - ./configure --prefix=/usr/local # This is the default prefix anyways
+    - ./configure --enable-mpi --prefix=/usr/local # This is the default prefix anyways
     # Add environmental variables according to the configure step
     #- sudo mkdir /usr/local/SU2
     - export SU2_RUN="/usr/local/bin"
