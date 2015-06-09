@@ -1,0 +1,28 @@
+
+language: cpp
+
+compiler:
+    - gcc
+
+notifications:
+    email:
+        - padronas@stanford.edu
+  
+branches:
+    only:
+        - feature_TravisCI
+
+#before_install:
+#    - sudo apt-get update
+#    - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
+  
+install:
+    - ./configure
+    - make
+    - cd QuickStart/
+  
+# run test
+script:  
+    #- python automatic_regression.py
+    - SU2_CFD inv_NACA0012.cfg
+
