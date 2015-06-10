@@ -4,9 +4,6 @@ language: cpp
 compiler:
     - g++
 
-env:
-    - CXXFLAGS=-O3
-
 notifications:
     email:
         - padronas@stanford.edu
@@ -19,9 +16,12 @@ before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy mpich2
 
+env:
+    - CXXFLAGS=-O3
+
 install:
     # Think test matrix compiling code in serial and parallel.
-    - ./configure --enable-mpi --with-cc=/usr/bin/mpicc --with-cxx=/usr/bin/mpicxx --prefix=/usr/local # This is the default prefix anyways
+    - ./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local # This is the default prefix anyways
     # Add environmental variables according to the configure step
     #- sudo mkdir /usr/local/SU2
     - export SU2_RUN="/usr/local/bin"
@@ -36,8 +36,8 @@ before_script:
     - git clone https://github.com/su2code/TestCases.git
     - cd TestCases
     - git checkout feature_TravisCI
-    - cat serial_regression.py
+    - cat parallel_regression.py
 
 # run test
 script:  
-    - python serial_regression.py
+    - python parallel_regression.py
