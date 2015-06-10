@@ -6,7 +6,6 @@ language: cpp
 compiler:
     - g++
 
-
 notifications:
     email:
         - padronas@stanford.edu
@@ -19,17 +18,16 @@ before_install:
     # install the necessary packages
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy mpich2
-    # Define the serial and parallel configuration commands
-    - export SERIAL='./configure --prefix=/usr/local CXXFLAGS="-O3"'
-    - export PARALLEL='./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
-    - echo $CONFIGURE_COMMAND
 
 env:
     # Set the build matrix
-    # Serial build
-    - CONFIGURE_COMMAND=$SERIAL
-    # Parallel build 
-    - CONFIGURE_COMMAND=$PARALLEL
+    matrix:
+        # Serial build and test
+        - CONFIGURE_COMMAND='./configure --prefix=/usr/local CXXFLAGS="-O3"' 
+          TEST_SCRIPT='serial_regresion.py'
+        # Parallel build and test
+        - CONFIGURE_COMMAND='./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
+          TEST_SCRIPT='parallel_regresion.py'
 
 install:
     - echo $CONFIGURE_COMMAND
@@ -52,7 +50,7 @@ before_script:
 
 script:
     # run the tests
-    - if [ $CONFIGURE_COMMAND == $SERIAL ]; then python serial_regression.py; fi
-    - if [ $CONFIGURE_COMMAND == $PARALLEL ]; then python parallel_regression.py; fi
-
+    #- if [ $CONFIGURE_COMMAND == $SERIAL ]; then python serial_regression.py; fi
+    #- if [ $CONFIGURE_COMMAND == $PARALLEL ]; then python parallel_regression.py; fi
+    python $TEST_SCRIPT
 
