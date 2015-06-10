@@ -15,9 +15,9 @@ branches:
 before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy
-    #- sudo apt-cache search mpi
-    #- sudo apt-cache search .
-    - sudo apt-get install libcr-dev mpich2 mpich2-doc
+    - sudo apt-cache search .
+    #- sudo apt-get install mpich2
+    - sudo apt-get install openmpi-bin #openmpi1.5-bin
     - which mpicc
     - which mpicxx
     - which mpirun
