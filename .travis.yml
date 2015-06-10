@@ -17,25 +17,7 @@ branches:
 
 before_install:
     - sudo apt-get update -qq
-    - sudo apt-get install -qq python-numpy
-    #- sudo apt-cache search mpi
-    - sudo apt-get install mpich2
-    #- sudo apt-get install openmpi-bin #openmpi1.5-bin
-    - which mpicc
-    - which mpicxx
-    - which mpirun
-    - which mpiexec
-    - pwd
-    - ls -lrt
-    - git clone https://github.com/su2code/TestCases.git
-    - cd TestCases
-    - git branch
-    - git checkout feature_TravisCI
-    - git branch
-    - cd ../
-    # Switch to the develop branch.
-    # Have optimization flag O3 on.
-    - ls -lrt
+    - sudo apt-get install -qq python-numpy mpich2
 
 install:
     # Think test matrix compiling code in serial and parallel.
@@ -47,13 +29,15 @@ install:
     - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
-    #- make -j 8
-    #- sudo make install
-    - cd QuickStart/
-  
+    - make -j 8
+    - sudo make install
+
+before_script:
+    - git clone https://github.com/su2code/TestCases.git
+    - cd TestCases
+    - git checkout feature_TravisCI
+    - cat serial_regression.py
+
 # run test
 script:  
-    #- python automatic_regression.py
-    #- SU2_CFD inv_NACA0012.cfg
-    - parallel_computation.py -f inv_NACA0012.cfg -n 4
-
+    - python serial_regression.py
