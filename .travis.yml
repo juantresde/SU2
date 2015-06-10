@@ -26,7 +26,9 @@ before_install:
     - ls -lrt
     - git clone https://github.com/su2code/TestCases.git
     - cd TestCases
-    - du -h
+    - git branch
+    - git checkout develop
+    - git branch
     - cd ../
     # Switch to the develop branch.
     # Have optimization flag O3 on.
@@ -42,8 +44,8 @@ install:
     - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
-    - make -j 8
-    - sudo make install
+    #- make -j 8
+    #- sudo make install
     - cd QuickStart/
   
 # run test
