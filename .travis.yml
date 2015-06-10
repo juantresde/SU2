@@ -4,6 +4,9 @@ language: cpp
 compiler:
     - gcc
 
+env:
+    - CXXFLAGS=-O3
+
 notifications:
     email:
         - padronas@stanford.edu
@@ -15,7 +18,7 @@ branches:
 before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy
-    - sudo apt-cache search mpi
+    #- sudo apt-cache search mpi
     - sudo apt-get install mpich2
     #- sudo apt-get install openmpi-bin #openmpi1.5-bin
     - which mpicc
@@ -27,7 +30,7 @@ before_install:
     - git clone https://github.com/su2code/TestCases.git
     - cd TestCases
     - git branch
-    - git checkout develop
+    - git checkout feature_TravisCI
     - git branch
     - cd ../
     # Switch to the develop branch.
