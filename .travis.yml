@@ -6,12 +6,12 @@ compiler:
     - g++
 
 env:
+    - SERIAL = './configure --prefix=/usr/local CXXFLAGS="-O3"'
+    - PARALLEL = './configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
     # Serial build and test
-    - CONFIGURE_COMMAND='./configure --prefix=/usr/local CXXFLAGS="-O3"'
-    - TEST_SCRIPT = serial_regression.py
+    - CONFIGURE_COMMAND=SERIAL # Maybe do $SERIAL
     # Parallel build and test 
-    - CONFIGURE_COMMAND='./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
-    - TEST_SCRIPT = parallel_regression.py
+    - CONFIGURE_COMMAND=PARALLEL
 
 notifications:
     email:
@@ -45,5 +45,8 @@ before_script:
     - cat $TEST_SCRIPT
 
 # run test
-script:  
-    - python $TEST_SCRIPT
+script:
+    - if [ CONFIGURE_COMMAND=SERIAL ]; then python serial_regression.py; fi
+    - if [ CONFIGURE_COMMAND=PARALLEL ]; then python parallel_regression.py; fi
+
+
