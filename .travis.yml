@@ -22,8 +22,13 @@ before_install:
     - which mpicxx
     - which mpirun
     - which mpiexec
+    - pwd
+    - ls -lrt
+    - git clone https://github.com/su2code/TestCases.git
+    - ls -lrt
 
 install:
+    # Think test matrix compiling code in serial and parallel.
     - ./configure --enable-mpi --with-cc=/usr/bin/mpicc --with-cxx=/usr/bin/mpicxx --prefix=/usr/local # This is the default prefix anyways
     # Add environmental variables according to the configure step
     #- sudo mkdir /usr/local/SU2
