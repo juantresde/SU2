@@ -24,17 +24,14 @@ env:
     matrix:
         # Serial build and test
         #- CONFIGURE_COMMAND="./configure CXXFLAGS=-O3 --prefix=/usr/local"
-        - CONFIGURE_COMMAND1=./configure
-          CONFIGURE_COMMAND2=CXXFLAGS=-O3
-          CONFIGURE_COMMAND3=--prefix=/usr/local
-          TEST_SCRIPT=serial_regression.py
+        #  TEST_SCRIPT=serial_regression.py
         # Parallel build and test
-        #- CONFIGURE_COMMAND='./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` CXXFLAGS="-O3"'
-        #  TEST_SCRIPT=parallel_regression.py
+        - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` CXXFLAGS=-O3"
+          TEST_SCRIPT=parallel_regression.py
 
 install:
-    - echo $CONFIGURE_COMMAND1 $CONFIGURE_COMMAND2 $CONFIGURE_COMMAND3
-    - $CONFIGURE_COMMAND1 $CONFIGURE_COMMAND2 $CONFIGURE_COMMAND3
+    - echo $CONFIGURE_COMMAND
+    - $CONFIGURE_COMMAND
     # Add environmental variables according to the configure step
     # Can I add this after the install.
     - export SU2_RUN="/usr/local/bin"
