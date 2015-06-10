@@ -4,12 +4,18 @@ language: cpp
 compiler:
     - g++
 
-env:
-    - CXXFLAGS=-O3
-    # Configure in serial
-    - CONFIGURE_COMMAND=./configure --prefix=/usr/local
-    # Configure in parallel
-    - CONFIGURE_COMMAND=./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local
+matrix:
+    env: 
+        - CXXFLAGS=-O3
+    include:
+        env:
+            # Serial build and test
+            - CONFIGURE_COMMAND=./configure --prefix=/usr/local
+            - TEST_SCRIPT = serial_regression.py
+            
+            # Parallel build and test
+            - CONFIGURE_COMMAND=./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local
+            - TEST_SCRIPT = parallel_regression.py
 
 notifications:
     email:
@@ -37,10 +43,10 @@ install:
 
 before_script:
     - git clone https://github.com/su2code/TestCases.git
-    - cd TestCases
+    - cd TestCases/
     - git checkout feature_TravisCI
-    - cat parallel_regression.py
+    - cat $TEST_SCRIPT
 
 # run test
 script:  
-    - python serial_regression.py
+    - python $TEST_SCRIPT
