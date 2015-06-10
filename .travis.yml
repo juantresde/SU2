@@ -5,17 +5,17 @@ compiler:
     - g++
 
 matrix:
-    env: 
-        - CXXFLAGS=-O3
     include:
         env:
             # Serial build and test
             - CONFIGURE_COMMAND=./configure --prefix=/usr/local
             - TEST_SCRIPT = serial_regression.py
-            
+            - CXXFLAGS=-O3
+        env: 
             # Parallel build and test
             - CONFIGURE_COMMAND=./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local
             - TEST_SCRIPT = parallel_regression.py
+            - CXXFLAGS=-O3
 
 notifications:
     email:
