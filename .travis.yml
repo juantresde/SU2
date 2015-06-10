@@ -6,12 +6,10 @@ compiler:
     - g++
 
 env:
-    - SERIAL = './configure --prefix=/usr/local CXXFLAGS="-O3"'
-    - PARALLEL = './configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
     # Serial build and test
-    - CONFIGURE_COMMAND=SERIAL # Maybe do $SERIAL
+    - CONFIGURE_COMMAND=$SERIAL
     # Parallel build and test 
-    - CONFIGURE_COMMAND=PARALLEL
+    - CONFIGURE_COMMAND=$PARALLEL
 
 notifications:
     email:
@@ -24,6 +22,8 @@ branches:
 before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy mpich2
+    - export SERIAL = './configure --prefix=/usr/local CXXFLAGS="-O3"'
+    - export PARALLEL = './configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
     - echo $CONFIGURE_COMMAND
 
 install:
@@ -42,11 +42,10 @@ before_script:
     - git clone https://github.com/su2code/TestCases.git
     - cd TestCases/
     - git checkout feature_TravisCI
-    - cat $TEST_SCRIPT
 
 # run test
 script:
-    - if [ CONFIGURE_COMMAND=SERIAL ]; then python serial_regression.py; fi
-    - if [ CONFIGURE_COMMAND=PARALLEL ]; then python parallel_regression.py; fi
+    - if [ $CONFIGURE_COMMAND == $SERIAL ]; then python serial_regression.py; fi
+    - if [ $CONFIGURE_COMMAND == $PARALLEL ]; then python parallel_regression.py; fi
 
 
