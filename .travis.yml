@@ -1,4 +1,4 @@
-
+# 
 language: cpp
 
 compiler:
@@ -9,12 +9,12 @@ matrix:
         
         # Serial build and test
         env:
-            - CONFIGURE_COMMAND=./configure --prefix=/usr/local CXXFLAGS='-O3'
+            - CONFIGURE_COMMAND='./configure --prefix=/usr/local CXXFLAGS="-O3"'
             - TEST_SCRIPT = serial_regression.py
         
         # Parallel build and test
         env: 
-            - CONFIGURE_COMMAND=./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS='-O3'
+            - CONFIGURE_COMMAND='./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
             - TEST_SCRIPT = parallel_regression.py
 
 notifications:
