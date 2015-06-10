@@ -2,18 +2,18 @@
 # Tests on the develop and master branch in both serial and parallel.
 language: cpp
 
+compiler:
+    - g++
+
 matrix:
-    include:
-        - compiler: g++
-            # Serial build and test
-            env:
-                - CONFIGURE_COMMAND='./configure --prefix=/usr/local CXXFLAGS="-O3"'
-                - TEST_SCRIPT = serial_regression.py
-        - compiler: g++
-            # Parallel build and test
-            env: 
-                - CONFIGURE_COMMAND='./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
-                - TEST_SCRIPT = parallel_regression.py
+    # Serial build and test
+    env:
+        - CONFIGURE_COMMAND='./configure --prefix=/usr/local CXXFLAGS="-O3"'
+        - TEST_SCRIPT = serial_regression.py
+    # Parallel build and test
+    env: 
+        - CONFIGURE_COMMAND='./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"'
+        - TEST_SCRIPT = parallel_regression.py
 
 notifications:
     email:
