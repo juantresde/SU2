@@ -23,11 +23,11 @@ env:
     # Set the build matrix
     matrix:
         # Serial build and test
-        - CONFIGURE_COMMAND=./configure --prefix=/usr/local CXXFLAGS="-O3" 
-          TEST_SCRIPT=serial_regresion.py
+        - CONFIGURE_COMMAND='./configure CXXFLAGS="-O3" --prefix=/usr/local' 
+          TEST_SCRIPT=serial_regression.py
         # Parallel build and test
-        - CONFIGURE_COMMAND=./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS="-O3"
-          TEST_SCRIPT=parallel_regresion.py
+        - CONFIGURE_COMMAND='./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` CXXFLAGS="-O3"'
+          TEST_SCRIPT=parallel_regression.py
 
 install:
     - echo $CONFIGURE_COMMAND
