@@ -4,6 +4,13 @@ language: cpp
 compiler:
     - g++
 
+env:
+    - CXXFLAGS=-O3
+    # Configure in serial
+    - CONFIGURE_COMMAND=./configure --prefix=/usr/local
+    # Configure in parallel
+    - CONFIGURE_COMMAND=./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local
+
 notifications:
     email:
         - padronas@stanford.edu
@@ -16,14 +23,10 @@ before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy mpich2
 
-env:
-    - CXXFLAGS=-O3
-
 install:
     # Think test matrix compiling code in serial and parallel.
-    - ./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local # This is the default prefix anyways
+    - $CONFIGURE_COMMAND
     # Add environmental variables according to the configure step
-    #- sudo mkdir /usr/local/SU2
     - export SU2_RUN="/usr/local/bin"
     # Find out what SU2_HOME is used for.
     - export SU2_HOME="/home/travis/build/su2code/SU2"
@@ -40,4 +43,4 @@ before_script:
 
 # run test
 script:  
-    - python parallel_regression.py
+    - python serial_regression.py
