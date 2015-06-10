@@ -6,16 +6,16 @@ compiler:
 
 matrix:
     include:
+        
+        # Serial build and test
         env:
-            # Serial build and test
-            - CONFIGURE_COMMAND=./configure --prefix=/usr/local
+            - CONFIGURE_COMMAND=./configure --prefix=/usr/local CXXFLAGS='-O3'
             - TEST_SCRIPT = serial_regression.py
-            - CXXFLAGS=-O3
+        
+        # Parallel build and test
         env: 
-            # Parallel build and test
-            - CONFIGURE_COMMAND=./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local
+            - CONFIGURE_COMMAND=./configure --enable-mpi --with-cc=`which mpicc` --with-cxx=`which mpicxx` --prefix=/usr/local CXXFLAGS='-O3'
             - TEST_SCRIPT = parallel_regression.py
-            - CXXFLAGS=-O3
 
 notifications:
     email:
