@@ -25,6 +25,11 @@ before_install:
     - pwd
     - ls -lrt
     - git clone https://github.com/su2code/TestCases.git
+    - cd TestCases
+    - du -h
+    - cd ../
+    # Switch to the develop branch.
+    # Have optimization flag O3 on.
     - ls -lrt
 
 install:
