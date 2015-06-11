@@ -1,0 +1,53 @@
+# Continous Integration setup for SU2.
+# Tests on the develop and master branch in both serial and parallel.
+
+language: cpp
+
+compiler:
+    - g++
+
+notifications:
+    email:
+        - padronas@stanford.edu
+  
+branches:
+    only:
+        - feature_TravisCI
+
+env:
+    # Set the build matrix
+    matrix:
+        # Serial build and test
+        - CONFIGURE_COMMAND="./configure CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
+          TEST_SCRIPT=serial_regression.py
+        # Parallel build and test
+        - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=mpicc --with-cxx=mpicxx CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
+          TEST_SCRIPT=parallel_regression.py
+
+before_install:
+    # install the necessary packages
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq python-numpy mpich2
+
+install:
+    - echo $CONFIGURE_COMMAND
+    - $CONFIGURE_COMMAND
+    - make -j 8
+    - make install
+    
+    # Add environmental variables according to the configure step
+    - export SU2_RUN="/home/travis/build/su2code/SU2/bin"
+    - export SU2_HOME="/home/travis/build/su2code/SU2"
+    - export PATH=$PATH:$SU2_RUN
+    - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
+
+before_script:
+    # Get the test cases
+    - git clone https://github.com/su2code/TestCases.git
+    - cd TestCases/
+    - git checkout feature_TravisCI
+
+script:
+    # run the tests
+    python $TEST_SCRIPT
+
