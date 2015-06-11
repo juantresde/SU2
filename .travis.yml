@@ -32,7 +32,7 @@ before_install:
 install:
     - echo $CONFIGURE_COMMAND
     - $CONFIGURE_COMMAND
-    - make -j 16
+    - make -j 8
     - make install
     
     # Add environmental variables according to the configure step
