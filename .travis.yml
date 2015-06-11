@@ -18,8 +18,8 @@ env:
     # Set the build matrix
     matrix:
         # Serial build and test
-        - CONFIGURE_COMMAND="./configure CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
-          TEST_SCRIPT=serial_regression.py
+        #- CONFIGURE_COMMAND="./configure CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
+        #  TEST_SCRIPT=serial_regression.py
         # Parallel build and test
         - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=mpicc --with-cxx=mpicxx CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
           TEST_SCRIPT=parallel_regression.py
@@ -28,6 +28,9 @@ before_install:
     # install the necessary packages
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy mpich2
+    - nproc
+    - lscpu
+    - getconf _NPROCESSORS_ONLN
 
 install:
     - echo $CONFIGURE_COMMAND
