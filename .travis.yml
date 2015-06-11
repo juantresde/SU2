@@ -29,17 +29,15 @@ before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy mpich2
 
-
 install:
     - echo $CONFIGURE_COMMAND
     - $CONFIGURE_COMMAND
-    # Add environmental variables according to the configure step
-    # Can I add this after the install.
     - make -j 8
     - make install
+    
+    # Add environmental variables according to the configure step
     - export SU2_RUN="/home/travis/build/su2code/SU2/bin"
-    # Find out what SU2_HOME is used for.
-    #- export SU2_HOME="/home/travis/build/su2code/SU2"
+    - export SU2_HOME="/home/travis/build/su2code/SU2"
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
 
