@@ -50,7 +50,5 @@ before_script:
 
 script:
     # run the tests
-    #- if [ $CONFIGURE_COMMAND == $SERIAL ]; then python serial_regression.py; fi
-    #- if [ $CONFIGURE_COMMAND == $PARALLEL ]; then python parallel_regression.py; fi
     python $TEST_SCRIPT
 
