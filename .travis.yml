@@ -28,14 +28,11 @@ before_install:
     # install the necessary packages
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy mpich2
-    - nproc
-    - lscpu
-    - getconf _NPROCESSORS_ONLN
 
 install:
     - echo $CONFIGURE_COMMAND
     - $CONFIGURE_COMMAND
-    - make -j 32
+    - make -j 16
     - make install
     
     # Add environmental variables according to the configure step
