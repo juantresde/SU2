@@ -23,7 +23,7 @@ env:
    #     - CONFIGURE_COMMAND="./configure --prefix=/home/travis/build/su2code/SU2"
     #      TEST_SCRIPT=serial_regression.py
         # Parallel build and test
-        - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=mpicc --with-cxx=mpicxx --prefix=/home/travis/build/su2code/SU2"
+        - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=mpicc --with-cxx=mpicxx --prefix=$TRAVIS_BUILD_DIR"
           TEST_SCRIPT=parallel_regression.py
 
 before_install:
@@ -39,8 +39,8 @@ install:
     #- make install
 
     # Add environmental variables according to the configure step
-    - export SU2_RUN="/home/travis/build/su2code/SU2/bin"
-    - export SU2_HOME="/home/travis/build/su2code/SU2"
+    - export SU2_RUN=TRAVIS_BUILD_DIR/bin
+    - export SU2_HOME=$TRAVIS_BUILD_DIR
     - export PATH=$PATH:$SU2_RUN
     - export PYTHONPATH=$PYTHONPATH:$SU2_RUN
 
