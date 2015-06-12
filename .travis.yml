@@ -15,13 +15,15 @@ branches:
         - feature_TravisCI
 
 env:
+    global:
+        CXXFLAGS=-O3
     # Set the build matrix
     matrix:
         # Serial build and test
-        - CONFIGURE_COMMAND="./configure CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
+        - CONFIGURE_COMMAND="./configure --prefix=/home/travis/build/su2code/SU2"
           TEST_SCRIPT=serial_regression.py
         # Parallel build and test
-        - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=mpicc --with-cxx=mpicxx CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
+        - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=mpicc --with-cxx=mpicxx --prefix=/home/travis/build/su2code/SU2"
           TEST_SCRIPT=parallel_regression.py
 
 before_install:
