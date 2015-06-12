@@ -29,7 +29,6 @@ before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq python-numpy mpich2
 
-
 install:
     - echo $CONFIGURE_COMMAND
     - $CONFIGURE_COMMAND
