@@ -18,8 +18,8 @@ env:
     # Set the build matrix
     matrix:
         # Serial build and test
-        #- CONFIGURE_COMMAND="./configure CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
-        #  TEST_SCRIPT=serial_regression.py
+        - CONFIGURE_COMMAND="./configure CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
+          TEST_SCRIPT=serial_regression.py
         # Parallel build and test
         - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=mpicc --with-cxx=mpicxx CXXFLAGS=-O3 --prefix=/home/travis/build/su2code/SU2"
           TEST_SCRIPT=parallel_regression.py
@@ -34,7 +34,6 @@ install:
     - $CONFIGURE_COMMAND
     - make -j 8
     - make install
-
 
     # Add environmental variables according to the configure step
     - export SU2_RUN="/home/travis/build/su2code/SU2/bin"
