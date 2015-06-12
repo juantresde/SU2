@@ -20,8 +20,8 @@ env:
     # Set the build matrix
     matrix:
         # Serial build and test
-        - CONFIGURE_COMMAND="./configure --prefix=/home/travis/build/su2code/SU2"
-          TEST_SCRIPT=serial_regression.py
+   #     - CONFIGURE_COMMAND="./configure --prefix=/home/travis/build/su2code/SU2"
+    #      TEST_SCRIPT=serial_regression.py
         # Parallel build and test
         - CONFIGURE_COMMAND="./configure --enable-mpi --with-cc=mpicc --with-cxx=mpicxx --prefix=/home/travis/build/su2code/SU2"
           TEST_SCRIPT=parallel_regression.py
@@ -32,10 +32,11 @@ before_install:
     - sudo apt-get install -qq python-numpy mpich2
 
 install:
+    - echo $TRAVIS_BUILD_DIR
     - echo $CONFIGURE_COMMAND
     - $CONFIGURE_COMMAND
-    - make -j 8
-    - make install
+    #- make -j 8
+    #- make install
 
     # Add environmental variables according to the configure step
     - export SU2_RUN="/home/travis/build/su2code/SU2/bin"
@@ -45,9 +46,9 @@ install:
 
 before_script:
     # Get the test cases
-    - git clone https://github.com/su2code/TestCases.git
-    - cd TestCases/
-    - git checkout feature_TravisCI
+    #- git clone https://github.com/su2code/TestCases.git
+    #- cd TestCases/
+    #- git checkout feature_TravisCI
 
 script:
     # run the tests
