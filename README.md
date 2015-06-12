@@ -31,10 +31,10 @@ SU2 is built using a typical configure/make/make install process. When make inst
 
 For example, add these lines to your .bashrc file:
 
-export SU2_RUN="your_prefix/bin"
-export SU2_HOME="/path/to/SU2vX.X.X/"
-export PATH=$PATH:$SU2_RUN
-export PYTHONPATH=$SU2_RUN:$PYTHONPATH
+- export SU2_RUN="your_prefix/bin"
+- export SU2_HOME="/path/to/SU2vX.X.X/"
+- export PATH=$PATH:$SU2_RUN
+- export PYTHONPATH=$SU2_RUN:$PYTHONPATH
 
 $SU2_RUN should point to the folder where all binaries and python scripts were installed. This is the prefix you set with the --prefix option to configure. Note that the bin/ directory is automatically added to your prefix path.
 
