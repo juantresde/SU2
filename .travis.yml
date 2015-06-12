@@ -34,7 +34,8 @@ install:
     - $CONFIGURE_COMMAND
     - make -j 8
     - make install
-    
+
+
     # Add environmental variables according to the configure step
     - export SU2_RUN="/home/travis/build/su2code/SU2/bin"
     - export SU2_HOME="/home/travis/build/su2code/SU2"
