@@ -12,7 +12,8 @@ notifications:
   
 branches:
     only:
-        - feature_TravisCI
+        #- feature_TravisCI
+        - develop
 
 env:
     global:
