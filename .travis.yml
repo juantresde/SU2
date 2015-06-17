@@ -48,7 +48,8 @@ before_script:
     # Get the test cases
     - git clone https://github.com/su2code/TestCases.git
     - cd TestCases/
-    - git checkout feature_TravisCI
+    #- git checkout feature_TravisCI
+    - git checkout develop
 
 script:
     # run the tests
